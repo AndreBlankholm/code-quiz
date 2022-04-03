@@ -8,7 +8,7 @@ var questions = [
     {
         questionNumber: 1,
         question: "What is the capital of Minnesota?",
-        options: ["Mankato", "St. Paul", "Minnapolis", "Rochester"],
+        options: ["Mankato", "St. Paul", "Minneapolis", "Rochester"],
         correctAnswer: "St. Paul"
     },
     {
@@ -32,20 +32,42 @@ var questions = [
 
 ];
 
+var evaluateAnswer = function(event) {
+
+}
 
 var buildQuizElements = function() {
     startBtn.setAttribute("style", "display: none;");
     var currentQuestion =  questions[currentQuestionIndex]; //current question is an Object.  <h3> What is the Capital of Mn </h3>
     console.log(currentQuestion);
-
+    
     var questionTag = "h3";
     var orderedListTag = "ol";
     var listItemTag = "li";
     var hrTag = "hr";
     var pTag = "p";
+    var buttonTag = "button";
 
     var questonEl = document.createElement(questionTag);
-    questonEl.innerHTML = currentQuestion.question; //
+    questonEl.innerHTML = currentQuestion.question; 
+    
+    var orderedListEl = document.createElement(orderedListTag);
+
+    for ( i = 0; i < currentQuestion.options.length; i++) {
+        var optionText = currentQuestion.options[i];   // grabs the text from each index and appended to <ol> only.
+        var listItemEl = document.createElement(listItemTag);
+        var buttonEl = document.createElement(buttonTag);
+        buttonEl.innerHTML = optionText;
+        buttonEl.addEventListener("click", evaluateAnswer);
+        listItemEl.appendChild(buttonEl);
+        orderedListEl.appendChild(listItemEl);
+    };
+     console.log(orderedListEl);
+
+    var questionContainer = document.getElementById("questions-container");
+    questionContainer.appendChild(questionEl);               //appending to the div the stuff I didnt append in the for loop                                   
+    questionContainer.appendChild(orderedListEl);
+
 };
 
 
