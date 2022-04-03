@@ -33,7 +33,7 @@ var questions = [
 ];
 
 var evaluateAnswer = function(event) {
-
+    console.log("it works");
 }
 
 var buildQuizElements = function() {
@@ -48,8 +48,18 @@ var buildQuizElements = function() {
     var pTag = "p";
     var buttonTag = "button";
 
-    var questonEl = document.createElement(questionTag);
-    questonEl.innerHTML = currentQuestion.question; 
+    var questionEl = document.createElement(questionTag);
+    questionEl.innerHTML = currentQuestion.question; 
+
+    var hrEl = document.createElement(hrTag);
+    var pEl = document.createElement(pTag);
+
+    //set style attributes that are needed
+    // hid the Hr line and result until question is answered
+    hrEl.setAttribute("id", "hr" + currentQuestion.questionNumber);  //
+    hrEl.setAttribute("style", "display: none;");
+    pEl.setAttribute("id", "p" + currentQuestion.questionNumber);  //
+    pEl.setAttribute("style", "display: none;");
     
     var orderedListEl = document.createElement(orderedListTag);
 
@@ -67,6 +77,15 @@ var buildQuizElements = function() {
     var questionContainer = document.getElementById("questions-container");
     questionContainer.appendChild(questionEl);               //appending to the div the stuff I didnt append in the for loop                                   
     questionContainer.appendChild(orderedListEl);
+    questionContainer.appendChild(hrEl);
+    questionContainer.appendChild(pEl);
+
+
+
+    var fiveMinutes = 60 * 1;
+    var display = document.querySelector("#time-remaining");
+
+    startTimer(fiveMinutes, display);
 
 };
 
@@ -82,7 +101,7 @@ var buildQuizElements = function() {
 
 
 
-var startTimer = function() {
+var startTimer = function(duration, display) {
 
 }
 
