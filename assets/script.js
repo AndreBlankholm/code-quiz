@@ -3,6 +3,7 @@ var correctAnswerCount = 0;
 var wrongAnswerCount = 0;
 var masterTimer = null;
 var currentQuestionIndex = 0;
+var delayInMilliseconds = 2000;
 
 var questions = [
     {
@@ -37,21 +38,34 @@ var evaluateAnswer = function(event) {
     var userChoice = event.target.innerHTML;
     var question = questions[currentQuestionIndex];
     var hrEl = document.getElementById("hr" + question.questionNumber);
-    hrEl.style = "";
+    hrEl.style = "display: block;";
     var pEl = document.getElementById("p" + question.questionNumber);
-    pEl.style = "";
+    pEl.style = "display: block;";
 
     if (userChoice === question.correctAnswer) {
         
         pEl.innerHTML = "Correct!";  // answers
     } else {
     
-        pEl.innerHTML = "Wrong Answer";
+        pEl.innerHTML = "Wrong Answer!";
         
     }
 
+    if(currentQuestionIndex < questions.length -1) {
+        currentQuestionIndex++;
 
-    currentQuestionIndex++;
+        setTimeout(function(){
+            //remove the old question from the DOM
+            var parentDiv = document.getElementById("questions-container");
+            parentDiv.innerHTML = "";
+            buildQuizElements();
+        }, delayInMilliseconds);
+
+    } else {
+        endQuiz();
+    }
+
+    
 }
 
 var buildQuizElements = function() {
@@ -128,7 +142,7 @@ var startQuiz = function(){
  }
 
 var endQuiz = function() {
-
+ alert("End of game thanks for playing");
 }
 
 startQuiz();
