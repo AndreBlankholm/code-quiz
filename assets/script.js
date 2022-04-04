@@ -33,7 +33,25 @@ var questions = [
 ];
 
 var evaluateAnswer = function(event) {
-    console.log("it works");
+    console.log(event.target.innerHTML);
+    var userChoice = event.target.innerHTML;
+    var question = questions[currentQuestionIndex];
+    var hrEl = document.getElementById("hr" + question.questionNumber);
+    hrEl.style = "";
+    var pEl = document.getElementById("p" + question.questionNumber);
+    pEl.style = "";
+
+    if (userChoice === question.correctAnswer) {
+        
+        pEl.innerHTML = "Correct!";  // answers
+    } else {
+    
+        pEl.innerHTML = "Wrong Answer";
+        
+    }
+
+
+    currentQuestionIndex++;
 }
 
 var buildQuizElements = function() {
@@ -85,13 +103,12 @@ var buildQuizElements = function() {
     var fiveMinutes = 60 * 1;
     var display = document.querySelector("#time-remaining");
 
+
+    
+
     startTimer(fiveMinutes, display);
-
+   
 };
-
-
-
-
 
 
 
@@ -107,8 +124,8 @@ var startTimer = function(duration, display) {
 
 
 var startQuiz = function(){
- buildQuizElements();
-}
+    buildQuizElements();
+ }
 
 var endQuiz = function() {
 
