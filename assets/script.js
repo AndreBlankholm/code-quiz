@@ -101,6 +101,7 @@ var buildQuizElements = function() {
         var buttonEl = document.createElement(buttonTag);
         buttonEl.innerHTML = optionText;
         buttonEl.addEventListener("click", evaluateAnswer);
+        buttonEl.setAttribute("class", "btn btn-primary");
         listItemEl.appendChild(buttonEl);
         orderedListEl.appendChild(listItemEl);
     };
