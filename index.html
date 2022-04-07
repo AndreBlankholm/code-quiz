@@ -9,16 +9,28 @@
     <title>Document</title>
 </head>
 <body>
-    <section>
-        <div>
-            <h2>Time Remaining: <span id="time-remaining">01:00</span></h2>
-            <h3 id="">View High Score: </h3>
+    <section class="row ">
+        <div >
+            <h2 id="time-remaining-text" >Time Remaining: <span id="time-remaining">01:00</span></h2>
+            <div id="view-high-score-button"  style="display: none;">View High Score:</div>
         </div>
+
     </section>
 
 
     <main>
-        <div id="questions-container" class="questions-container">
+        <div id="start-page-container" class="start-page-container">
+            <h2>Title</h2>
+            <p>Instructions</p>
+            <button id="start-btn" class="btn btn-primary">Begin Quiz</button>
+
+        </div>
+        <div id="high-scores-container" style="display: none;">
+            <p>High Scores</p>
+            <button id="go-back-button" class="btn btn-primary">Go Back</button>
+        </div>
+
+        <div id="questions-container" class="questions-container" style="display: none;">
 
         </div>
         <div class="results-container" style="display: none;">
@@ -26,7 +38,7 @@
         </div>
     </main>
 
-    <button id="start-btn" class="btn btn-primary">Begin Quiz!!</button>
+   
     
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>

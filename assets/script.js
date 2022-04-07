@@ -1,9 +1,23 @@
+var startPageContainer = document.getElementById("start-page-container");
+var questionsContainer = document.getElementById("questions-container");
 var startBtn = document.getElementById("start-btn");
+var viewHighScoreButton = document.getElementById("view-high-score-button");
+var highScoresContainer = document.getElementById("high-scores-container");
+var timeRemainingText = document.getElementById("time-remaining-text");
+var goBackButton = document.getElementById("go-back-button");
+var timeLimit = 60 * 1;
+var intervalId = null;
+var gameOver = false;
+var display = document.querySelector("#time-remaining");
 var correctAnswerCount = 0;
 var wrongAnswerCount = 0;
 var masterTimer = null;
 var currentQuestionIndex = 0;
 var delayInMilliseconds = 2000;
+var minutes = 0;
+var seconds = 0;
+var timer = null;
+
 
 var questions = [
     {
@@ -35,41 +49,53 @@ var questions = [
 
 var evaluateAnswer = function(event) {
     console.log(event.target.innerHTML);
-    var userChoice = event.target.innerHTML;
-    var question = questions[currentQuestionIndex];
-    var hrEl = document.getElementById("hr" + question.questionNumber);
-    hrEl.style = "display: block;";
-    var pEl = document.getElementById("p" + question.questionNumber);
-    pEl.style = "display: block;";
-
-    if (userChoice === question.correctAnswer) {
+        var userChoice = event.target.innerHTML;
+        var question = questions[currentQuestionIndex];
+        var hrEl = document.getElementById("hr" + question.questionNumber);
         
-        pEl.innerHTML = "Correct!";  // answers
-    } else {
-    
-        pEl.innerHTML = "Wrong Answer!";
-        
-    }
+        if(hrEl !== null) {
+            hrEl.style = "display: block;";
+        };
 
-    if(currentQuestionIndex < questions.length -1) {
-        currentQuestionIndex++;
+        var pEl = document.getElementById("p" + question.questionNumber);
+        
+        if(pEl !== null) {
+            pEl.style = "display: block;";
+        }
+        
+        if (userChoice === question.correctAnswer) {
+            
+        if(pEl !== null) {
+            pEl.innerHTML = "Correct!";  // answers
+        };
+        } else {
+        
+        if(pEl !== null) {
+            pEl.innerHTML = "Wrong Answer!";
+        };
+            timer = timer - 10;
+
+        }
+
+        if(currentQuestionIndex < questions.length -1) {
+            currentQuestionIndex++;
 
         setTimeout(function(){
             //remove the old question from the DOM
+            
             var parentDiv = document.getElementById("questions-container");
             parentDiv.innerHTML = "";
-            buildQuizElements();
-        }, delayInMilliseconds);
+            buildQuizElements();        
+        },  delayInMilliseconds);
 
     } else {
-        endQuiz();
+       endQuiz();
     }
 
     
 }
 
 var buildQuizElements = function() {
-    startBtn.setAttribute("style", "display: none;");
     var currentQuestion =  questions[currentQuestionIndex]; //current question is an Object.  <h3> What is the Capital of Mn </h3>
     console.log(currentQuestion);
     
@@ -113,37 +139,64 @@ var buildQuizElements = function() {
     questionContainer.appendChild(hrEl);
     questionContainer.appendChild(pEl);
 
-
-
-    var fiveMinutes = 60 * 1;
-    var display = document.querySelector("#time-remaining");
-
-
     
-
-    startTimer(fiveMinutes, display);
-   
 };
 
+var viewHighScores = function() {
+    timeRemainingText.setAttribute("style", "display: none;");
+    viewHighScoreButton.setAttribute("style", "display: none;");
+    startPageContainer.setAttribute("style", "display: none;");
+    highScoresContainer.setAttribute("style", "display: block;");
+    questionsContainer.setAttribute("style", "display: none;");
+};
+
+viewHighScoreButton.addEventListener("click", viewHighScores);
 
 
+var goBack = function() {
+    timeRemainingText.setAttribute("style", "display: block;");
+    viewHighScoreButton.setAttribute("style", "display: block;");
+    startPageContainer.setAttribute("style", "display: block;");
+    highScoresContainer.setAttribute("style", "display: none;");
 
+};
 
-
-
-
+goBackButton.addEventListener("click", goBack);
 
 var startTimer = function(duration, display) {
-
+    timer = duration, minutes, seconds;
+    masterTimer = timer;
+    intervalId = setInterval(function () {
+      minutes = parseInt(timer / 60, 10);
+      seconds = parseInt(timer % 60, 10);
+  
+      minutes = minutes < 10 ? "0" + minutes : minutes;
+      seconds = seconds < 10 ? "0" + seconds : seconds;
+  
+      display.textContent = minutes + ":" + seconds;
+  
+      if (--timer < 0 && gameOver === false) {
+        timer = duration;
+        endQuiz();
+      }
+    }, 1000);
 }
 
 
 var startQuiz = function(){
+    
+    startPageContainer.setAttribute("style", "display: none;");
+    questionsContainer.setAttribute("style", "display: block;");
     buildQuizElements();
- }
-
-var endQuiz = function() {
- alert("End of game thanks for playing");
+    startTimer(timeLimit, display);
 }
 
-startQuiz();
+var endQuiz = function() {
+ gameOver = true;  
+ clearInterval(intervalId);
+ console.log("End of game thanks for playing");
+ viewHighScoreButton.setAttribute("style", "display: block;");
+
+}
+
+startBtn.addEventListener("click", startQuiz);
