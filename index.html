@@ -8,20 +8,23 @@
     <link rel="stylesheet" href="assets/css/style.css"/>
     <title>Document</title>
 </head>
-<body>
-    <section class="row ">
-        <div >
-            <h2 id="time-remaining-text" >Time Remaining: <span id="time-remaining">01:00</span></h2>
-            <div id="view-high-score-button"  style="display: none;">View High Score:</div>
+<body class="bodyTag">
+    <section class="container" style="margin-bottom: 100px;">
+        <div id="top" class="row">                                           
+            <div id="view-high-score-button"  class="col-6" style="color:blueviolet; font-size: 25px; justify-self: start;">View High Score:</div>
+            <h2 id="time-remaining-text" class="time-remaining-text col-6">Time: <span id="time-remaining">01:00</span></h2>
+            
         </div>
 
     </section>
 
 
-    <main>
-        <div id="start-page-container" class="start-page-container">
-            <h2>Title</h2>
-            <p>Instructions</p>
+    <main class="container">
+        <div id="start-page-container" class="start-page-container row" style="font-weight: bolder;font-size: 40px; margin-top: 100px;" >
+            <h2 class="col-12"></h2>
+            <p id="high" class="col-12 p-5">Coding Quiz Challenge
+                <br/>
+                Try to answer the code related questions within the time limit. Keep in mind that incorrect answers penilize your score and time by ten seconds.</p>
             <button id="start-btn" class="btn btn-primary">Begin Quiz</button>
 
         </div>
@@ -29,8 +32,14 @@
             <p>High Scores</p>
             <button id="go-back-button" class="btn btn-primary">Go Back</button>
         </div>
+        <div id="high-scores-list">
+            <!--container for highscore list-->
 
-        <div id="questions-container" class="questions-container" style="display: none;">
+        </div>
+        <div >
+            <!--the form -->
+        </div>  
+        <div id="questions-container" class="questions-container col-12" style="display: none;">
 
         </div>
         <div class="results-container" style="display: none;">

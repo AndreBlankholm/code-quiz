@@ -1,4 +1,16 @@
 li {
-    margin-bottom: 5px;
+    margin-bottom: 10px;
+    
 };
+
+body {
+    display: flex;
+
+}
+
+ #start-page-container, #high, h3 {
+     display:flex;
+     justify-content: center;
+ };
+
 
