@@ -1,5 +1,5 @@
-# Code-qiz
-4. Web APIs Challenge
+# code-quiz
+## Web APIs Challenge
 
 ## Language used in project to perform tasks: Html, Css, Java Script
 GIVEN I am taking a code quiz
@@ -15,9 +15,9 @@ WHEN the game is over
 THEN I can save my initials and score
 
 ## Links to project: 
-### GitHub: https://github.com/AndreBlankholm/code-quiz
+### GitHub: https://github.com/AndreBlankholm/code-quiz  
 ### Live URL: https://andreblankholm.github.io/code-quiz/
 
-<img src="" alt=" ">
+<img src="./assets/images/ch4.png" alt="Picture of a Coding Quiz challenge website">
 
 ## License & copyright © Andre Blankholm, U of M Coding Bootcamp
