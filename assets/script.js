@@ -75,7 +75,7 @@ var questions = [
 
 var evaluateAnswer = function (event) {
   event.target.disabled = true;
-  console.log(event.target.innerHTML);
+ 
   var userChoice = event.target.innerHTML;
   var question = questions[currentQuestionIndex];
   var hrEl = document.getElementById("hr" + question.questionNumber);
@@ -116,6 +116,7 @@ var evaluateAnswer = function (event) {
   } else {
     endQuiz();
   }
+
 };
 
 var buildQuizElements = function () {
@@ -149,13 +150,13 @@ var buildQuizElements = function () {
     var listItemEl = document.createElement(listItemTag);
     listItemEl.setAttribute("style", "list-style-type: none;");
     var buttonEl = document.createElement(buttonTag);
-    buttonEl.innerHTML = (i + 1) + ". " + optionText;
+    buttonEl.innerHTML = optionText;
     buttonEl.addEventListener("click", evaluateAnswer);
     buttonEl.setAttribute("class", "btn btn-primary");
     listItemEl.appendChild(buttonEl);
     orderedListEl.appendChild(listItemEl);
   }
-  console.log(orderedListEl);
+  
 
   var questionContainer = document.getElementById("questions-container");
   questionContainer.appendChild(questionEl); //appending to the div the stuff I didnt append in the for loop
